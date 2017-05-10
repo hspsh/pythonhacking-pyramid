@@ -4,4 +4,4 @@ def includeme(config):
     config.add_route('hello_json', '/hello_j/', request_method='GET')
     config.add_route('hello_html', '/hello_h/', request_method='GET')
     config.add_route('simple_form', '/form/', request_method='GET')
-    config.add_route('form_resp', '/form_resp/', request_method='POST')
+    config.add_route('form_resp', '/form/', request_method='POST')
