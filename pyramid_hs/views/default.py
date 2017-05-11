@@ -43,3 +43,13 @@ def hello_h(request):
 def hello(request):
     request.response.status = 200
     return {'message': 'hello world'}
+
+@view_config(route_name="simple_form", renderer="../templates/simple_form.jinja2")
+def simple_form(request):
+    request.response.status = 200
+    return {}
+
+@view_config(route_name="form_resp", renderer="../templates/form_response.jinja2")
+def form_resp(request):
+    request.response.status = 200
+    return {'message': request.params['message']}
