@@ -53,3 +53,16 @@ def simple_form(request):
 def form_resp(request):
     request.response.status = 200
     return {'message': request.params['message']}
+
+@view_config(route_name="example_view", renderer="../templates/example_template.jinja2")
+def example_view(request):
+    example_dict = {
+        'key_a': 'value_a',
+        'key_b': 'value_b'
+    }
+    example_list = [1,2,3, "<b>some paragraph</b>", "<b>some bold paragraph</b>"]
+    request.response.status = 200
+    return {
+        'some_dict': example_dict,
+        'some_list': example_list
+    }

@@ -1,0 +1,50 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="content">
+    <h1>Project name: {{ project_name | default("Test2") }}</h1>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <p class="panel-title">Example list</p>
+        </div>
+        <div class="panel-body" style="background-color: #bc2131">
+            <ul>
+              {% for el in some_list %}
+                  {% if loop.last %}
+                    <li>index: {{ loop.index }} : {{ el|safe }}</li>
+                  {%  else %}
+                      <li>index: {{ loop.index }} : {{ el }}</li>
+                  {% endif %}
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <p class="panel-title">Slice: </p>
+        </div >
+        <div class="panel-body" style="background-color: #bc2131">
+            {% for list in some_list|slice(3) %}
+                <p>
+                    {% for el in list %}
+                        <span>{{ el }}{% if not loop.last %},{% endif %}</span>
+                    {% endfor %}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <p class="panel-title">Example dict</p>
+        </div >
+        <div class="panel-body" style="background-color: #bc2131">
+            <dl>
+                {% for d_key, d_item in some_dict.items() %}
+                    <dt>{{ d_key|e }}</dt>
+                    <dd>{{ d_item|e }}</dd>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}
