@@ -1,6 +1,7 @@
 import os
 import sys
 import transaction
+from datetime import date
 
 from pyramid.paster import (
     get_appsettings,
@@ -9,12 +10,8 @@ from pyramid.paster import (
 
 from pyramid.scripts.common import parse_vars
 
-from ..models.meta import Base
-from ..models import (
-    get_engine,
-    get_session_factory,
-    get_tm_session,
-    )
+from pyramid_hs.models.mymodel import Person, Pet
+from ..db import db
 from ..models import MyModel
 
 
@@ -33,13 +30,6 @@ def main(argv=sys.argv):
     setup_logging(config_uri)
     settings = get_appsettings(config_uri, options=options)
 
-    engine = get_engine(settings)
-    Base.metadata.create_all(engine)
-
-    session_factory = get_session_factory(engine)
-
     with transaction.manager:
-        dbsession = get_tm_session(session_factory, transaction.manager)
-
-        model = MyModel(name='one', value=1)
-        dbsession.add(model)
+        db.create_tables([MyModel, Person, Pet], safe=True)
+        Person.create(name='Bob', birthday=date(year=1960, month=5, day=1), is_relative=False)

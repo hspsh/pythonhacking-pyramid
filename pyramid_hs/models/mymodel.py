@@ -1,18 +1,28 @@
-from sqlalchemy import (
-    Column,
-    Index,
-    Integer,
-    Text,
-)
+import datetime
 
-from .meta import Base
+from peewee import Model, CharField, IntegerField, DateField, BooleanField, ForeignKeyField
+
+from pyramid_hs.db import db
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
-    id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+class BaseModel(Model):
+    created = DateField(default=datetime.datetime.now)
+
+    class Meta:
+        database = db
+
+class MyModel(BaseModel):
+    name = CharField()
+    value = IntegerField()
 
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+class Person(BaseModel):
+    name = CharField()
+    birthday = DateField()
+    is_relative = BooleanField()
+
+
+class Pet(BaseModel):
+    owner = ForeignKeyField(Person, related_name='pets')
+    name = CharField()
+    animal_type = CharField()
