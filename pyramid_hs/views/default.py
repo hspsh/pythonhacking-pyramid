@@ -5,13 +5,13 @@ from pyramid.view import view_config
 from pyramid_hs.models import Person
 
 
-@view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
-def my_view(request):
-    try:
-        one = Person.select().where(Person.name=='Bob').get()
-    except PeeweeException:
-        return Response(db_err_msg, content_type='text/plain', status=500)
-    return {'one': one, 'project': 'pyramid_hs'}
+# @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
+# def my_view(request):
+#     try:
+#         one = Person.select().where(Person.name == 'Bob').get()
+#     except PeeweeException:
+#         return Response(db_err_msg, content_type='text/plain', status=500)
+#     return {'one': one, 'project': 'pyramid_hs'}
 
 
 db_err_msg = """\
@@ -42,15 +42,18 @@ def hello(request):
     request.response.status = 200
     return {'message': 'hello world'}
 
+
 @view_config(route_name="simple_form", renderer="../templates/simple_form.jinja2")
 def simple_form(request):
     request.response.status = 200
     return {}
 
+
 @view_config(route_name="form_resp", renderer="../templates/form_response.jinja2")
 def form_resp(request):
     request.response.status = 200
     return {'message': request.params['message']}
+
 
 @view_config(route_name="example_view", renderer="../templates/example_template.jinja2")
 def example_view(request):
@@ -58,9 +61,14 @@ def example_view(request):
         'key_a': 'value_a',
         'key_b': 'value_b'
     }
-    example_list = [1,2,3, "<b>some paragraph</b>", "<b>some bold paragraph</b>"]
+    example_list = [1, 2, 3, "<b>some paragraph</b>", "<b>some bold paragraph</b>"]
     request.response.status = 200
     return {
         'some_dict': example_dict,
         'some_list': example_list
     }
+
+
+@view_config(route_name="index", renderer="../templates/index.jinja2")
+def index(request):
+    return {}
