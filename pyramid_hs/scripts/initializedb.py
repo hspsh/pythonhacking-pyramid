@@ -29,3 +29,4 @@ def main(argv=sys.argv):
 
     with transaction.manager:
         db.create_tables([Todo], safe=True)
+        Todo.create(title='Test todo 1', desc='This is the first and test todo')
