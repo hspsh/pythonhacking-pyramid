@@ -25,8 +25,8 @@
         <tr>
             <td class="col-md-3">{{ todo.title }}</td>
             <td class="col-md-3">{{ todo.description }}</td>
-            <td class="col-md-3">{{ todo.date_added.strftime('%Y-%m-%d') }}</td>
-            <td class="col-md-3">{{ todo.due_date.strftime('%Y-%m-%d')}}</td>
+            <td class="col-md-3">{{ todo.date_added }}</td>
+            <td class="col-md-3">-</td>
         </tr>
     {% endfor %}
 </table>
