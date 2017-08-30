@@ -1,4 +1,6 @@
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPFound
+
 from pyramid_hs.models.mymodel import Todo
 
 
@@ -15,3 +17,13 @@ def index(request):
     return {
         "todo_list": todo_list
     }
+
+
+@view_config(route_name="add_todo", renderer="../templates/add_todo.jinja2")
+def add_todo(request):
+    if request.method == 'POST':
+        title = request.POST.get("title")
+        desc = request.POST.get("description")
+        Todo.create(title=title, desc=desc)
+        raise HTTPFound("/")
+    return {}
