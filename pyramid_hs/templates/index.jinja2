@@ -11,7 +11,27 @@
 </head>
 <body>
 
-<p>Hello World! </p>
+<div class="container">
+<p>Todo list</p>
+<div class="row">
+<table class="table table-hover">
+    <tr>
+        <td class="col-md-3">Name</td>
+        <td class="col-md-3">Description</td>
+        <td class="col-md-3">Date added</td>
+        <td class="col-md-3">Due date</td>
+    </tr>
+    {% for todo in todo_list %}
+        <tr>
+            <td class="col-md-3">{{ todo.title }}</td>
+            <td class="col-md-3">{{ todo.description }}</td>
+            <td class="col-md-3">{{ todo.date_added.strftime('%Y-%m-%d') }}</td>
+            <td class="col-md-3">{{ todo.due_date.strftime('%Y-%m-%d')}}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
 
 </body>
 </html>
