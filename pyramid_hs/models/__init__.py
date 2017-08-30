@@ -1,4 +1,4 @@
-from .mymodel import MyModel, Person, Pet
+from .mymodel import Todo
 
 
 def includeme(config):

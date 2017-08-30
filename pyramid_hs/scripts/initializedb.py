@@ -1,18 +1,15 @@
 import os
 import sys
-import transaction
-from datetime import date
 
+import transaction
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
-    )
-
+)
 from pyramid.scripts.common import parse_vars
 
-from pyramid_hs.models.mymodel import Person, Pet
+from pyramid_hs.models.mymodel import Todo
 from ..db import db
-from ..models import MyModel
 
 
 def usage(argv):
@@ -31,5 +28,4 @@ def main(argv=sys.argv):
     settings = get_appsettings(config_uri, options=options)
 
     with transaction.manager:
-        db.create_tables([MyModel, Person, Pet], safe=True)
-        Person.create(name='Bob', birthday=date(year=1960, month=5, day=1), is_relative=False)
+        db.create_tables([Todo], safe=True)

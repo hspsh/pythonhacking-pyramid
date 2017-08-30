@@ -1,6 +1,6 @@
 import unittest
-import transaction
 
+import transaction
 from pyramid import testing
 
 
@@ -24,20 +24,20 @@ class BaseTest(unittest.TestCase):
         transaction.abort()
 
 
-class TestMyViewSuccessCondition(BaseTest):
-
-    def setUp(self):
-        super(TestMyViewSuccessCondition, self).setUp()
-        self.init_database()
-
-        from .models import MyModel
-
-        model = MyModel(name='one', value=55)
-
-    def test_passing_view(self):
-        from .views.default import my_view
-
-class TestMyViewFailureCondition(BaseTest):
-
-    def test_failing_view(self):
-        from .views.default import my_view
+# class TestMyViewSuccessCondition(BaseTest):
+#
+#     def setUp(self):
+#         super(TestMyViewSuccessCondition, self).setUp()
+#         self.init_database()
+#
+#         from .models import MyModel
+#
+#         model = MyModel(name='one', value=55)
+#
+#     def test_passing_view(self):
+#         from .views.default import my_view
+#
+# class TestMyViewFailureCondition(BaseTest):
+#
+#     def test_failing_view(self):
+#         from .views.default import my_view
