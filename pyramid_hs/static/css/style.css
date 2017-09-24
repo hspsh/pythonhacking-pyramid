@@ -22,3 +22,7 @@
 .data {
 
 }
+
+.table_header {
+    background: lightgray;
+}

@@ -21,22 +21,22 @@
 {% endblock %}
 
 {% block content %}
-    <table class="table table-hover table-responsive">
-        <thead class="thead-inverse">
+    <table class="table table-sm table-hover table-responsive">
+        <thead class="table_header">
             <tr>
-                <td class="col-md-3">Name</td>
-                <td class="col-md-3">Description</td>
-                <td class="col-md-3">Date added</td>
-                <td class="col-md-3">Due date</td>
+                <td><strong>Name</strong></td>
+                <td><strong>Description</strong></td>
+                <td><strong>Date added</strong></td>
+                <td><strong>Due date</strong></td>
             </tr>
         </thead>
         <tbody>
             {% for todo in todo_list %}
                 <tr>
-                    <td class="col-md-3">{{ todo.title }}</td>
-                    <td class="col-md-3">{{ todo.description }}</td>
-                    <td class="col-md-3">{{ todo.date_added }}</td>
-                    <td class="col-md-3">-</td>
+                    <td>{{ todo.title }}</td>
+                    <td>{{ todo.description }}</td>
+                    <td>{{ todo.date_added }}</td>
+                    <td>-</td>
                 </tr>
             {% endfor %}
         </tbody>
