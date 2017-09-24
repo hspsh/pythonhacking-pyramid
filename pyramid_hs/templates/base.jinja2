@@ -12,9 +12,15 @@
 </head>
 <body>
     <div class="container">
-        {% block header %}{% endblock %}
-        {% block menu %}{% endblock %}
-        {% block content %}{% endblock %}
+        <div class="row col-12 header">
+            {% block header %}{% endblock %}
+        </div>
+        <div class="row col-12 menu">
+            {% block menu %}{% endblock %}
+        </div>
+        <div class="row col-12 data">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 </body>
 </html>
