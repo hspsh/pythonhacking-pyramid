@@ -28,9 +28,9 @@
             </thead>
             <tbody>
                 {% for todo in todo_list %}
-                    <tr>
+                    <tr onclick="document.location = '{{ todo.id }}';" class="trLink">
                         <td>{{ todo.title }}</td>
-                        <td>{{ todo.description }}</td>
+                        <td>{{ todo.description or '-'}}</td>
                         <td>{{ todo.date_added }}</td>
                         <td>-</td>
                     </tr>
