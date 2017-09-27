@@ -1,0 +1,28 @@
+.header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.menu {
+    padding-bottom: 15px;
+}
+
+.menu_button {
+    color: black;
+}
+
+.menu_button:hover {
+    background: lightblue;
+}
+
+.menu_button.selected {
+    background: darkgray;
+}
+
+.data {
+
+}
+
+.table_header {
+    background: lightgray;
+}

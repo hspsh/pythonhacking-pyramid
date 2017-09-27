@@ -1,41 +1,39 @@
 {% extends "../base.jinja2" %}
 
 {% block header %}
-    <div class="row">
-        <h3>{{ site_header }}</h3>
+    <div class="content">
+        <h2>{{ site_header }}</h2>
     </div>
 {% endblock %}
 
 {% block menu %}
-    <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a type="button" class="navbar-brand btn btn-default active" href="/">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                  <li class="nav-item active">
-                    <a type="button" class="btn btn-default" href="/add">Add new todo</a>
-                  </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item menu_button" href="/">Home</a>
+            <a class="navbar-item menu_button selected" href="/add">Add new todo</a>
+        </div>
+    </nav>
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <form method="post">
-            <div class="form-group">
-                <label for="usr">Title:</label>
-                <input type="text" class="form-control" id="title" name="title">
-            </div>
-            <div class="form-group">
-                <label for="desc">Description</label>
-                <textarea class="form-control" rows="5" id="desc" name="description"></textarea>
-            </div>
-            <button class="btn btn-default" type="submit">Add</button>
-        </form>
+    <div class="columns">
+        <div class="column is-4">
+            <form method="post">
+                <div class="field">
+                    <label for="title">Title:</label>
+                    <div class="control">
+                        <input type="text" class="input" id="title" name="title" maxlength="200" placeholder="Title">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="desc">Description</label>
+                    <div class="control">
+                        <textarea class="textarea" rows="5" id="desc" name="description" placeholder="Description"></textarea>
+                    </div>
+                </div>
+                <button class="button" type="submit">Add</button>
+            </form>
+        </div>
+        <div class="column is-6"></div>
     </div>
 {% endblock %}

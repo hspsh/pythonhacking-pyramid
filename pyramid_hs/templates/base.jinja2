@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Super ToDo</title>
-
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/style.css">
-    <script src="/static/js/jquery-3.2.1.js"></script>
-    <script src="/static/js/bootstrap.js"></script>
-
-</head>
-<body>
-    <div class="container">
-        {% block header %}{% endblock %}
-        {% block menu %}{% endblock %}
-        {% block content %}{% endblock %}
-    </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Super ToDo</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/static/css/bulma.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+    <body>
+        <div class="section">
+            <div class="container is-12 header">
+                {% block header %}{% endblock %}
+            </div>
+            <div class="container is-12 menu">
+                {% block menu %}{% endblock %}
+            </div>
+        </div>
+        <div class="section">
+            <div class="container is-12 data">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="/static/js/jquery-3.2.1.js"></script>
+    </body>
 </html>
