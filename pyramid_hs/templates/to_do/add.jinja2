@@ -22,13 +22,19 @@
                 <div class="field">
                     <label for="title">Title:</label>
                     <div class="control">
-                        <input type="text" class="input" id="title" name="title" maxlength="200" placeholder="Title">
+                        <input type="text" class="input
+                                {% if title_error %}is-danger{% endif %}"
+                               id="title" name="title" maxlength="200" placeholder="Title"
+                               {% if title %}value="{{ title }}"{% endif %} required>
                     </div>
+                    {% if title_error %}
+                        <p class="help is-danger">{{ message }}</p>
+                    {% endif %}
                 </div>
                 <div class="field">
                     <label for="desc">Description</label>
                     <div class="control">
-                        <textarea class="textarea" rows="5" id="desc" name="description" placeholder="Description"></textarea>
+                        <textarea class="textarea" rows="5" id="desc" name="description" placeholder="Description">{% if description %}{{ description }}{% endif %}</textarea>
                     </div>
                 </div>
                 <button class="button" type="submit">Add</button>

@@ -2,6 +2,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
 from pyramid_hs.models.mymodel import Todo
+from pyramid_hs.validators import ValidationException, todo_validator
 
 
 @view_config(route_name="index", renderer="../templates/to_do/list.jinja2")
@@ -22,11 +23,18 @@ def index(request):
 
 @view_config(route_name="add_todo", renderer="../templates/to_do/add.jinja2")
 def add_todo(request):
-    if request.method == 'POST':
-        title = request.POST.get("title")
-        desc = request.POST.get("description")
-        Todo.create(title=title, desc=desc)
-        raise HTTPFound("/")
-    return {
+    context = {
         "site_header": "Add new todo"
     }
+    if request.method == 'POST':
+        try:
+            validated_data = todo_validator(request.POST)
+        except ValidationException as ve:
+            context.update(ve.errors)
+            context.update(request.POST)
+            return context
+        title = validated_data.get("title")
+        desc = validated_data.get("description")
+        Todo.create(title=title, desc=desc)
+        raise HTTPFound("/")
+    return context
