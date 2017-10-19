@@ -53,3 +53,32 @@ def display_todo(request):
         "description": todo.desc,
         "date_added": todo.created_at,
     }
+
+def edit_todo(request):
+    pk = int(request.matchdict['pk'])
+    try:
+        todo = Todo.get(id=pk)
+    except Todo.DoesNotExist:
+        raise HTTPNotFound
+
+    context = {
+        "site_header": "Todo {} update".format(pk)
+    }
+
+    if request.method == 'POST':
+        try:
+            validated_data = todo_validator(request.POST)
+        except ValidationException as ve:
+            context.update(ve.errors)
+            context.update(request.POST)
+            return context
+
+        todo.title = validated_data.get('title')
+        todo.desc = validated_data.get('desc')
+        todo.save()
+        # TODO redirect to detail view
+        return
+    context['title'] = todo.title
+    context["description"] = todo.desc
+    context["date_added"] = todo.created_at
+    return context
