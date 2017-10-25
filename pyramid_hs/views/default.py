@@ -49,7 +49,39 @@ def display_todo(request):
         raise HTTPNotFound
     return {
         "site_header": "Todo {}".format(pk),
+        "id": todo.id,
         "title": todo.title,
         "description": todo.desc,
         "date_added": todo.created_at,
     }
+
+
+@view_config(route_name="edit_todo", renderer="../templates/to_do/edit.jinja2")
+def edit_todo(request):
+    pk = int(request.matchdict['pk'])
+    try:
+        todo = Todo.get(id=pk)
+    except Todo.DoesNotExist:
+        raise HTTPNotFound
+
+    context = {
+        "site_header": "Todo {} update".format(pk)
+    }
+
+    if request.method == 'POST':
+        try:
+            validated_data = todo_validator(request.POST)
+        except ValidationException as ve:
+            context.update(ve.errors)
+            context.update(request.POST)
+            return context
+
+        todo.title = validated_data.get('title')
+        todo.desc = validated_data.get('desc')
+        todo.save()
+        return HTTPFound(request.route_path('display_todo', pk=pk))
+    context['id'] = todo.id
+    context['title'] = todo.title
+    context["description"] = todo.desc
+    context["date_added"] = todo.created_at
+    return context
