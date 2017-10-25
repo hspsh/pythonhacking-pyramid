@@ -1,0 +1,48 @@
+{% extends "../base.jinja2" %}
+
+{% block header %}
+    <div class="content">
+        <h2>{{ site_header }}</h2>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item menu_button selected" href="/">Home</a>
+            <a class="navbar-item menu_button" href="/add">Add new todo</a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="columns">
+        <div class="column is-4">
+            <form method="post">
+                <label>TODO id: {{ id }}</label>
+                <div class="field">
+                    <label for="title">Title:</label>
+                    <div class="control">
+                        <input type="text" class="input
+                                {% if title_error %}is-danger{% endif %}"
+                               id="title" name="title" maxlength="200" placeholder="Title"
+                               {% if title %}value="{{ title }}"{% endif %} required>
+                    </div>
+                    {% if title_error %}
+                        <p class="help is-danger">{{ message }}</p>
+                    {% endif %}
+                </div>
+                <div class="field">
+                    <label for="desc">Description</label>
+                    <div class="control">
+                        <textarea class="textarea" rows="5" id="desc" name="desc" placeholder="Description">{% if description %}{{ description }}{% endif %}</textarea>
+                    </div>
+                </div>
+                <button class="button" type="submit">Update</button>
+                <a href="/{{ id }}" class="button is-danger">Cancel</a>
+            </form>
+        </div>
+        <div class="column is-6"></div>
+    </div>
+{% endblock %}
+
